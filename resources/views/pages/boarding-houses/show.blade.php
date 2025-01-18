@@ -163,7 +163,7 @@
                         <br>
                         <span class="text-sm font-normal">/bulan</span>
                     </p>
-                    <a href="room-available.html"
+                    <a href="{{ route('boarding-houses.room', $boardingHouse->slug) }}"
                         class="flex shrink-0 rounded-full py-[14px] px-5 bg-ngekos-orange font-bold text-white">Book
                         Now</a>
                 </div>

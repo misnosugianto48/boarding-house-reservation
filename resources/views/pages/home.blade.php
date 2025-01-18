@@ -81,7 +81,7 @@
                                     </div>
                                     <hr class="border-[#F1F2F6]">
                                     <p class="font-semibold text-lg text-ngekos-orange">Rp
-                                        {{ number_format($popularBoardingHouse->price, 0, '.', '.') }}<span
+                                        {{ number_format($popularBoardingHouse->price, 0, ',', '.') }}<span
                                             class="text-sm text-ngekos-grey font-normal">/bulan</span></p>
                                 </div>
                             </div>
@@ -158,7 +158,7 @@
                             </div>
                             <hr class="border-[#F1F2F6]">
                             <p class="font-semibold text-lg text-ngekos-orange">Rp
-                                {{ number_format($boardingHouse->price, 0, '.', '.') }}<span
+                                {{ number_format($boardingHouse->price, 0, ',', '.') }}<span
                                     class="text-sm text-ngekos-grey font-normal">/bulan</span></p>
                         </div>
                     </div>

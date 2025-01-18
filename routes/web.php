@@ -16,6 +16,7 @@ Route::get('/cities/{slug}', [CityController::class, 'show'])->name('cities.show
 Route::get('/find-kos', [BoardingHouseController::class, 'find'])->name('find');
 
 Route::get('/boarding-houses/{slug}', [BoardingHouseController::class, 'show'])->name('boarding-houses.show');
+Route::get('/boarding-houses/{slug}/rooms', [BoardingHouseController::class, 'rooms'])->name('boarding-houses.room');
 
 Route::get('/find-results', [BoardingHouseController::class, 'findResults'])->name('find.results');
 
