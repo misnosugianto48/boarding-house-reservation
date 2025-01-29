@@ -68,6 +68,7 @@
                 </label>
             @endforeach
 
+
         </div>
         <div id="BottomButton" class="relative flex w-full h-[98px] shrink-0">
             <div class="fixed bottom-[30px] w-full max-w-[640px] px-5 z-10">

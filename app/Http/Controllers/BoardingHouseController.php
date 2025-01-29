@@ -24,13 +24,6 @@ class BoardingHouseController extends Controller
         $this->boardingHouseRepository = $boardingHouseRepository;
     }
 
-    public function find()
-    {
-        $categories = $this->categoryRepository->getAllCategories();
-        $cities = $this->cityRepository->getAllCities();
-        return view('pages.boarding-houses.find', compact('categories', 'cities'));
-    }
-
     public function show($slug)
     {
         $boardingHouse = $this->boardingHouseRepository->getBoardingHouseBySlug($slug);
@@ -43,6 +36,15 @@ class BoardingHouseController extends Controller
         $boardingHouse = $this->boardingHouseRepository->getBoardingHouseBySlug($slug);
         return view('pages.boarding-houses.rooms', compact('boardingHouse'));
     }
+
+    public function find()
+    {
+        $categories = $this->categoryRepository->getAllCategories();
+        $cities = $this->cityRepository->getAllCities();
+        return view('pages.boarding-houses.find', compact('categories', 'cities'));
+    }
+
+
 
     public function findResults(Request $request)
     {

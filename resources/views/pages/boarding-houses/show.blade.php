@@ -114,6 +114,8 @@
                                 </div>
                             </div>
                         @endforeach
+
+
                     </div>
                 </div>
                 <div id="Testimonials-Tab" class="tab-content flex-col gap-5 hidden">
@@ -130,20 +132,21 @@
                                     <div>
                                         <p class="font-semibold">{{ $testi->name }}</p>
                                         <p class="mt-[2px] text-sm text-ngekos-grey">
-                                            {{ date_format($testi->created_at, 'j F Y') }}</p>
-                                        </p>
+                                            {{ date_format($testi->created_at, 'd F Y') }}</p>
                                     </div>
                                 </div>
-                                <p class="leading-[26px]"{{ $testi->content }}</p>
+                                <p class="leading-[26px]">{{ $testi->content }}</p>
                                 <div class="flex">
-                                    @for ($i = 0; $i < $testi->rating; $i++)
+                                    @for ($i = 1; $i < $testi->rating; $i++)
                                         <img src="{{ asset('assets/images/icons/Star 1.svg') }}"
                                             class="w-[22px] h-[22px] flex shrink-0" alt="">
                                     @endfor
 
+
                                 </div>
                             </div>
                         @endforeach
+
 
                     </div>
                 </div>
@@ -163,7 +166,7 @@
                         <br>
                         <span class="text-sm font-normal">/bulan</span>
                     </p>
-                    <a href="{{ route('boarding-houses.room', $boardingHouse->slug) }}"
+                    <a href="{{ route('boarding-houses.rooms', $boardingHouse->slug) }}"
                         class="flex shrink-0 rounded-full py-[14px] px-5 bg-ngekos-orange font-bold text-white">Book
                         Now</a>
                 </div>
