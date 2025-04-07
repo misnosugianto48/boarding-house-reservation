@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BookingShowRequest;
 use App\Http\Requests\CustomerInformationStoreRequest;
 use App\Interfaces\BoardingHouseRepositoryInterface;
 use App\Interfaces\TransactionRepositoryInterface;
@@ -70,11 +71,55 @@ class BookingController extends Controller
         $this->transactionRepository->saveTransactionDataToSession($request->all());
         $transaction = $this->transactionRepository->saveTransaction($this->transactionRepository->getTranscationDataFromSession());
 
-        dd($transaction);
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('midtrans.serverKey');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = config('midtrans.isProduction');
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = config('midtrans.isSanitized');
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = config('midtrans.is3ds');
+
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $transaction->code,
+                'gross_amount' => $transaction->total_amount,
+            ),
+            'customer_details' => array(
+                'first_name' => $transaction->name,
+                'email' => $transaction->email,
+                'phone' => $transaction->phone_number,
+            ),
+        );
+
+        $paymentUrl = \Midtrans\Snap::createTransaction($params)->redirect_url;
+
+        return redirect($paymentUrl);
+    }
+
+    public function success(Request $request)
+    {
+        $transaction = $this->transactionRepository->getTransactionByCode($request->order_id);
+
+        if (!$transaction) {
+            return redirect()->route('home');
+        }
+        return view('pages.booking.success', compact('transaction'));
     }
 
     public function check()
     {
-        return view('pages.booking');
+        return view('pages.booking.check-booking');
+    }
+
+    public function showDetailsBooking(BookingShowRequest $request)
+    {
+        $transaction = $this->transactionRepository->getTransactionByCodeEmailPhone($request->code, $request->email, $request->phone_number);
+
+        if (!$transaction) {
+            return redirect()->back()->with('error', 'Booking not found');
+        }
+
+        return view('pages.booking.detail', compact('transaction'));
     }
 }

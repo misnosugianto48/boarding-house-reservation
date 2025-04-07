@@ -74,8 +74,7 @@ class TransactionResource extends Resource
                 Tables\Columns\TextColumn::make('room.name'),
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('payment_method'),
-                Tables\Columns\TextColumn::make('payment_status
-                '),
+                Tables\Columns\TextColumn::make('payment_status'),
                 Tables\Columns\TextColumn::make('total_amount')->money('idr'),
                 Tables\Columns\TextColumn::make('transaction_date'),
             ])
@@ -83,6 +82,7 @@ class TransactionResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
